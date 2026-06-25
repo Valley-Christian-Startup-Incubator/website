@@ -1,8 +1,29 @@
 ---
-import CodeDemo from './CodeDemo.tsx';
-
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const orgUrl = 'https://github.com/Valley-Christian-Startup-Incubator';
 const tapUrl = 'https://github.com/Valley-Christian-Startup-Incubator/tap';
+
+// Real screen recordings of the flow on the actual tap repo.
+const shots = [
+  {
+    src: `${base}/demo-edit.webp`,
+    label: 'registry.json · GitHub',
+    caption: 'Add your entry in the web editor.',
+    alt: 'GitHub web editor showing registry.json with a new project entry added to the array.',
+  },
+  {
+    src: `${base}/demo-diff.webp`,
+    label: 'Comparing changes',
+    caption: 'Your PR adds a clean block — “Able to merge”.',
+    alt: 'GitHub compare view showing 11 additions, a green diff block, and an "Able to merge" check.',
+  },
+  {
+    src: `${base}/demo-pr.webp`,
+    label: 'Open a pull request',
+    caption: 'Give it a title and open the PR.',
+    alt: 'GitHub open-a-pull-request form with a title, description, and the green Create pull request button.',
+  },
+];
 
 const steps = [
   {
@@ -32,31 +53,6 @@ const steps = [
   },
 ];
 
-const sampleJson = `{
-  "name": "Compost Tracker",
-  "slug": "compost-tracker",
-  "tagline": "Gamified composting for school cafeterias",
-  "repo": "jane-2024/compost-tracker",
-  "status": "active",
-  "stack": ["Next.js", "Supabase", "Tailwind"],
-  "owners": ["@jane-2024"],
-  "handoffDocs": "README.md",
-  "addedAt": "2026-06-24"
-}`;
-
-const gitFlow = `# 1. Fork tap on GitHub, then clone YOUR fork
-git clone https://github.com/<your-username>/tap.git
-cd tap
-
-# 2. Create a branch for your project
-git checkout -b register/compost-tracker
-
-# 3. Edit the registry, then commit
-git add .
-git commit -m "Register Compost Tracker"
-
-# 4. Push and open a pull request
-git push -u origin register/compost-tracker`;
 ---
 
 <section id="register" class="relative scroll-mt-20 px-5 py-24 sm:px-8 md:py-32">
@@ -112,9 +108,38 @@ git push -u origin register/compost-tracker`;
           }
         </ol>
 
-        <!-- Code panels: the one intentional dark moment, animated -->
-        <div class="reveal min-w-0" data-reveal-delay="0.12">
-          <CodeDemo json={sampleJson} flow={gitFlow} client:visible />
+        <!-- Real screenshots of the flow on the actual tap repo -->
+        <div class="reveal min-w-0 space-y-5" data-reveal-delay="0.12">
+          {
+            shots.map((shot, i) => (
+              <figure class="overflow-hidden rounded-2xl border-[1.5px] border-ink bg-surface shadow-hard">
+                <figcaption class="flex items-center gap-2 border-b-[1.5px] border-ink bg-bg px-4 py-2.5">
+                  <span class="flex gap-1.5" aria-hidden="true">
+                    <span class="h-2.5 w-2.5 rounded-full border border-ink/30 bg-[#ff5f57]" />
+                    <span class="h-2.5 w-2.5 rounded-full border border-ink/30 bg-[#febc2e]" />
+                    <span class="h-2.5 w-2.5 rounded-full border border-ink/30 bg-[#28c840]" />
+                  </span>
+                  <span class="ml-1 truncate font-mono text-xs text-ink-muted">
+                    {shot.label}
+                  </span>
+                </figcaption>
+                <img
+                  src={shot.src}
+                  alt={shot.alt}
+                  width="1400"
+                  loading="lazy"
+                  decoding="async"
+                  class="block w-full"
+                />
+                <figcaption class="flex items-center gap-2 border-t-[1.5px] border-ink bg-surface px-4 py-3 text-sm font-semibold text-ink">
+                  <span class="grid h-6 w-6 flex-none place-items-center rounded-full border-[1.5px] border-ink bg-saffron font-display text-xs font-extrabold">
+                    {i + 1}
+                  </span>
+                  {shot.caption}
+                </figcaption>
+              </figure>
+            ))
+          }
         </div>
       </div>
 
