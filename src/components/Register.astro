@@ -3,53 +3,47 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const orgUrl = 'https://github.com/Valley-Christian-Startup-Incubator';
 const tapUrl = 'https://github.com/Valley-Christian-Startup-Incubator/tap';
 
-// Real screen recordings of the flow on the actual tap repo.
-const shots = [
+// "What it is" — the conceptual facts, before any mechanical steps.
+const facts = [
   {
-    src: `${base}/demo-edit.webp`,
-    label: 'registry.json · GitHub',
-    caption: 'Add your entry in the web editor.',
-    alt: 'GitHub web editor showing registry.json with a new project entry added to the array.',
+    title: 'You keep your code',
+    body: 'Your project lives in your own GitHub account. Registering just <strong>lists</strong> it — nothing moves into the org.',
   },
   {
-    src: `${base}/demo-diff.webp`,
-    label: 'Comparing changes',
-    caption: 'Your PR adds a clean block — “Able to merge”.',
-    alt: 'GitHub compare view showing 11 additions, a green diff block, and an "Able to merge" check.',
+    title: 'Bring hand-off docs',
+    body: 'Your repo needs a <code>README</code> on how to <strong>maintain</strong>, <strong>deploy</strong>, and <strong>learn</strong> it.',
   },
   {
-    src: `${base}/demo-pr.webp`,
-    label: 'Open a pull request',
-    caption: 'Give it a title and open the PR.',
-    alt: 'GitHub open-a-pull-request form with a title, description, and the green Create pull request button.',
+    title: "It's one pull request",
+    body: 'Add a line to a shared file and open a PR. A mentor reviews it — your first real open-source contribution.',
   },
 ];
 
+// The how-to: 3 steps, each paired 1:1 with the screenshot that shows it.
 const steps = [
   {
     n: 1,
-    title: 'Keep your project in your own repo',
-    body: "Your code stays yours — in your account. You own it during the program, and you can keep it after you graduate. Nothing moves into the org just to register.",
+    title: 'Fork & edit the registry',
+    body: 'Fork the <code>tap</code> repo, then add an entry to <code>registry.json</code> that points at your repo and links your docs.',
+    shot: `${base}/demo-edit.webp`,
+    label: 'registry.json · GitHub',
+    alt: 'GitHub web editor showing registry.json with a new project entry added to the array.',
   },
   {
     n: 2,
-    title: 'Write the hand-off docs',
-    body: 'Add a <code>README</code> covering how to <strong>maintain</strong>, <strong>deploy</strong>, and <strong>learn</strong> the project — so anyone who picks it up later can get going.',
+    title: 'Check your change',
+    body: 'Open a compare view. You should see a clean green block adding your entry, and a green <strong>“Able to merge”</strong> check.',
+    shot: `${base}/demo-diff.webp`,
+    label: 'Comparing changes',
+    alt: 'GitHub compare view showing 11 additions, a green diff block, and an "Able to merge" check.',
   },
   {
     n: 3,
-    title: 'Fork the registry',
-    body: 'The <code>tap</code> repo holds one JSON file listing every project. Fork it so you can propose a change.',
-  },
-  {
-    n: 4,
-    title: 'Add your project entry',
-    body: 'Append an entry that points at your repo and links your docs. Keep it accurate — this is what people browse.',
-  },
-  {
-    n: 5,
-    title: 'Open a pull request',
-    body: 'Open a PR back to <code>tap</code>. A mentor reviews it, and once merged, you\'re registered. 🎉',
+    title: 'Open the pull request',
+    body: 'Give it a title and hit <strong>Create pull request</strong>. A mentor reviews it, and once merged, you\'re registered. 🎉',
+    shot: `${base}/demo-pr.webp`,
+    label: 'Open a pull request',
+    alt: 'GitHub open-a-pull-request form with a title, description, and the green Create pull request button.',
   },
 ];
 
@@ -76,72 +70,79 @@ const steps = [
           class="reveal mt-5 max-w-prose text-lg text-ink/80"
           data-reveal-delay="0.1"
         >
-          Your code stays in your own account — registering just lists it so it
-          can be maintained and handed off. It's a single pull request, and
-          you'll learn the real open-source workflow doing it.
+          Here's exactly what it is and exactly what you do.
         </p>
       </div>
 
-      <div class="mt-12 grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12">
-        <!-- Steps on a white panel -->
-        <ol
-          class="reveal min-w-0 divide-y divide-ink/10 rounded-2xl border-[1.5px] border-ink bg-surface p-2"
-          data-reveal-delay="0.08"
-        >
-          {
-            steps.map((s) => (
-              <li class="flex gap-4 p-4 sm:p-5">
-                <span
-                  class="grid h-9 w-9 flex-none place-items-center rounded-full border-[1.5px] border-ink bg-saffron font-display text-base font-extrabold text-ink"
-                >
+      <!-- WHAT IT IS — the concepts, before any mechanics -->
+      <div class="reveal mt-10 grid gap-4 sm:grid-cols-3" data-reveal-delay="0.08">
+        {
+          facts.map((f) => (
+            <div class="rounded-2xl border-[1.5px] border-ink bg-surface p-5">
+              <h3 class="font-display text-lg font-bold text-ink">{f.title}</h3>
+              <p
+                class="mt-1.5 text-[0.95rem] leading-relaxed text-ink-muted [&_code]:rounded [&_code]:bg-ink [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.82em] [&_code]:text-banana [&_strong]:font-semibold [&_strong]:text-ink"
+                set:html={f.body}
+              />
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- DO IT — 3 steps, each paired 1:1 with its screenshot -->
+      <h3
+        class="reveal mt-14 font-display text-2xl font-extrabold text-ink sm:text-3xl"
+        data-reveal-delay="0.05"
+      >
+        Do it in 3 steps
+      </h3>
+
+      <ol class="mt-6 space-y-6">
+        {
+          steps.map((s) => (
+            <li
+              class="reveal grid items-center gap-5 rounded-2xl border-[1.5px] border-ink bg-surface p-5 shadow-hard sm:p-6 lg:grid-cols-[0.85fr_1.15fr] lg:gap-8"
+              data-reveal-delay="0.06"
+            >
+              {/* instruction */}
+              <div class="flex gap-4">
+                <span class="grid h-10 w-10 flex-none place-items-center rounded-full border-[1.5px] border-ink bg-saffron font-display text-lg font-extrabold text-ink">
                   {s.n}
                 </span>
                 <div class="min-w-0">
-                  <h3 class="text-lg font-bold leading-snug">{s.title}</h3>
+                  <h4 class="text-xl font-bold leading-snug text-ink">{s.title}</h4>
                   <p
-                    class="mt-1 text-[0.95rem] leading-relaxed text-ink-muted [overflow-wrap:anywhere] [&_code]:rounded [&_code]:bg-ink [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.82em] [&_code]:text-banana [&_code]:[overflow-wrap:anywhere] [&_strong]:font-semibold [&_strong]:text-ink"
+                    class="mt-1.5 leading-relaxed text-ink-muted [overflow-wrap:anywhere] [&_code]:rounded [&_code]:bg-ink [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.82em] [&_code]:text-banana [&_code]:[overflow-wrap:anywhere] [&_strong]:font-semibold [&_strong]:text-ink"
                     set:html={s.body}
                   />
                 </div>
-              </li>
-            ))
-          }
-        </ol>
+              </div>
 
-        <!-- Real screenshots of the flow on the actual tap repo -->
-        <div class="reveal min-w-0 space-y-5" data-reveal-delay="0.12">
-          {
-            shots.map((shot, i) => (
-              <figure class="overflow-hidden rounded-2xl border-[1.5px] border-ink bg-surface shadow-hard">
-                <figcaption class="flex items-center gap-2 border-b-[1.5px] border-ink bg-bg px-4 py-2.5">
+              {/* the screenshot that shows exactly this step */}
+              <figure class="min-w-0 overflow-hidden rounded-xl border-[1.5px] border-ink bg-surface">
+                <figcaption class="flex items-center gap-2 border-b-[1.5px] border-ink bg-bg px-3 py-2">
                   <span class="flex gap-1.5" aria-hidden="true">
                     <span class="h-2.5 w-2.5 rounded-full border border-ink/30 bg-[#ff5f57]" />
                     <span class="h-2.5 w-2.5 rounded-full border border-ink/30 bg-[#febc2e]" />
                     <span class="h-2.5 w-2.5 rounded-full border border-ink/30 bg-[#28c840]" />
                   </span>
                   <span class="ml-1 truncate font-mono text-xs text-ink-muted">
-                    {shot.label}
+                    {s.label}
                   </span>
                 </figcaption>
                 <img
-                  src={shot.src}
-                  alt={shot.alt}
+                  src={s.shot}
+                  alt={s.alt}
                   width="1400"
                   loading="lazy"
                   decoding="async"
                   class="block w-full"
                 />
-                <figcaption class="flex items-center gap-2 border-t-[1.5px] border-ink bg-surface px-4 py-3 text-sm font-semibold text-ink">
-                  <span class="grid h-6 w-6 flex-none place-items-center rounded-full border-[1.5px] border-ink bg-saffron font-display text-xs font-extrabold">
-                    {i + 1}
-                  </span>
-                  {shot.caption}
-                </figcaption>
               </figure>
-            ))
-          }
-        </div>
-      </div>
+            </li>
+          ))
+        }
+      </ol>
 
       <!-- CTA row -->
       <div

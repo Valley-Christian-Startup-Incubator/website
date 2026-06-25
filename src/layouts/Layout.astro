@@ -12,7 +12,11 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
-const ogImage = new URL('og.png', Astro.site);
+// Astro.site is the domain root; assets live under BASE_URL (/website/).
+const ogImage = new URL(
+  `${import.meta.env.BASE_URL}/og.png`.replace(/\/{2,}/g, '/'),
+  Astro.site,
+);
 ---
 
 <!doctype html>
