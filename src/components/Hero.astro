@@ -1,0 +1,86 @@
+---
+import NebulaHero from './NebulaHero.tsx';
+const orgUrl = 'https://github.com/Valley-Christian-Startup-Incubator';
+---
+
+<section
+  class="relative flex min-h-svh items-center justify-center overflow-hidden"
+>
+  <!-- Three.js orbit field — lazy hydrated, sits behind everything -->
+  <div class="absolute inset-0 z-0" aria-hidden="true">
+    <NebulaHero client:visible />
+  </div>
+
+  <!-- Soft fade at the bottom so the section settles into the next one -->
+  <div
+    class="pointer-events-none absolute inset-x-0 bottom-0 z-10 h-40"
+    style="background: linear-gradient(to bottom, transparent, var(--color-bg));"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div class="relative z-20 mx-auto max-w-4xl px-5 text-center sm:px-8">
+    <a
+      href={orgUrl}
+      target="_blank"
+      rel="noopener"
+      class="reveal mb-8 inline-flex items-center gap-2 rounded-full border-[1.5px] border-ink bg-surface px-4 py-1.5 text-xs font-bold text-ink shadow-hard"
+    >
+      <span class="h-2 w-2 rounded-full bg-saffron"></span>
+      A Valley Christian School accelerator
+    </a>
+
+    <h1
+      class="reveal text-[clamp(2.7rem,8.5vw,5.75rem)] leading-[1.04]"
+      data-reveal-delay="0.05"
+    >
+      <span class="block">Build something</span>
+      <span class="mt-1 inline-block">
+        <span class="mark-saffron box-decoration-clone px-2 py-0.5"
+          >that outlasts you.</span
+        >
+      </span>
+    </h1>
+
+    <p
+      class="reveal mx-auto mt-8 max-w-xl text-pretty text-lg text-ink-muted sm:text-xl"
+      data-reveal-delay="0.12"
+    >
+      A Valley Christian accelerator for students building real businesses.
+      Register your project so it can be maintained, deployed, and passed on —
+      long after you've moved on.
+    </p>
+
+    <div
+      class="reveal mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
+      data-reveal-delay="0.18"
+    >
+      <a
+        href="#register"
+        class="group inline-flex items-center gap-2 rounded-full border-[1.5px] border-ink bg-saffron px-7 py-3.5 text-base font-bold text-ink shadow-hard-lg transition-transform hover:-translate-y-0.5"
+      >
+        Register your project
+        <span class="transition-transform group-hover:translate-x-0.5">→</span>
+      </a>
+      <a
+        href="#how"
+        class="inline-flex items-center gap-2 rounded-full border-[1.5px] border-ink bg-surface px-7 py-3.5 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
+      >
+        See how it works
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll cue -->
+  <div
+    class="reveal absolute bottom-8 left-1/2 z-20 -translate-x-1/2"
+    data-reveal-delay="0.4"
+    aria-hidden="true"
+  >
+    <div
+      class="flex h-9 w-5 items-start justify-center rounded-full border-[1.5px] border-ink p-1"
+    >
+      <span class="h-2 w-1 animate-bounce rounded-full bg-ink"></span>
+    </div>
+  </div>
+</section>

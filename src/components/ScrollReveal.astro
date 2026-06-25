@@ -1,0 +1,71 @@
+---
+/**
+ * Drop this once near the end of a page. It finds every `.reveal` element
+ * and fades/slides it in on scroll using GSAP ScrollTrigger.
+ * Honors prefers-reduced-motion (elements just appear).
+ */
+---
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const prefersReduced = window.matchMedia(
+    '(prefers-reduced-motion: reduce)',
+  ).matches;
+
+  const els = gsap.utils.toArray<HTMLElement>('.reveal');
+
+  if (prefersReduced) {
+    // Honor reduced motion: show everything, no animation.
+    gsap.set(els, { opacity: 1, y: 0 });
+  } else {
+    // Each element animates in once its top crosses 88% of the viewport.
+    // `once: true` keeps it cheap; the CSS sets the hidden start state so
+    // there is no flash of un-styled content before JS runs.
+    els.forEach((el) => {
+      const delay = parseFloat(el.dataset.revealDelay ?? '0');
+      gsap.to(el, {
+        opacity: 1,
+        y: 0,
+        duration: 0.9,
+        delay,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top 88%',
+          once: true,
+        },
+      });
+    });
+
+    // Parallax for any element tagged data-parallax (speed multiplier).
+    gsap.utils.toArray<HTMLElement>('[data-parallax]').forEach((el) => {
+      const speed = parseFloat(el.dataset.parallax ?? '0.2');
+      gsap.to(el, {
+        yPercent: speed * 100,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: el,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+    });
+
+    // Triggers are created at module eval — but fonts, the hero <canvas>,
+    // and images all shift layout afterwards, leaving stale start positions
+    // (the bug that left below-the-fold sections invisible). Recompute once
+    // everything that affects height has settled.
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener('load', refresh);
+    if ((document as any).fonts?.ready) {
+      (document as any).fonts.ready.then(refresh);
+    }
+    // Belt-and-suspenders: a deferred refresh in case `load` already fired.
+    setTimeout(refresh, 350);
+  }
+</script>

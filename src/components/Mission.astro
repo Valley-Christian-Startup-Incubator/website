@@ -1,0 +1,66 @@
+---
+const points = [
+  {
+    k: 'Maintained',
+    color: 'bg-saffron',
+    body: 'Real businesses with real guidance, not one-off class projects.',
+  },
+  {
+    k: 'Documented',
+    color: 'bg-sky',
+    body: 'The docs a successor needs: how to run it, ship it, learn it.',
+  },
+  {
+    k: 'Transferable',
+    color: 'bg-green',
+    body: 'Ready for the next student instead of going dark.',
+  },
+];
+---
+
+<section id="mission" class="relative mx-auto max-w-6xl scroll-mt-20 px-5 py-24 sm:px-8 md:py-32">
+  <div class="grid gap-12 lg:grid-cols-[1fr_0.85fr] lg:gap-16">
+    <div>
+      <h2
+        class="reveal max-w-xl text-[clamp(2rem,5vw,3.4rem)]"
+      >
+        An accelerator for students building
+        <span class="mark-sky box-decoration-clone px-1">real businesses.</span>
+      </h2>
+      <div
+        class="reveal mt-8 max-w-prose space-y-5 text-lg leading-relaxed text-ink-muted"
+        data-reveal-delay="0.08"
+      >
+        <p>
+          Valley Christian's Startup Incubator (SUI) mentors students building
+          real ventures with real users — not class projects left behind after
+          the demo.
+        </p>
+        <p>
+          This site handles one part of that: a shared registry of projects.
+          You keep owning your code — <strong class="font-semibold text-ink"
+            >registering yours</strong
+          > just makes it findable, so it can be maintained and handed off when
+          you move on.
+        </p>
+      </div>
+    </div>
+
+    <dl class="reveal flex flex-col justify-center gap-0 divide-y divide-line" data-reveal-delay="0.12">
+      {
+        points.map((p) => (
+          <div class="flex items-baseline gap-4 py-5">
+            <span
+              class={`mt-1 h-3.5 w-3.5 flex-none rounded-full border-[1.5px] border-ink ${p.color}`}
+              aria-hidden="true"
+            />
+            <div>
+              <dt class="font-display text-xl font-bold text-ink">{p.k}</dt>
+              <dd class="mt-1 text-ink-muted">{p.body}</dd>
+            </div>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>

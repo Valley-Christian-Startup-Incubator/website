@@ -1,0 +1,62 @@
+---
+const faqs = [
+  {
+    q: 'What exactly is the Startup Incubator?',
+    a: "A Valley Christian accelerator that mentors students building impactful businesses. This site covers one piece: registering your project in a shared list so it can be maintained and handed off. Your code stays in your own account.",
+  },
+  {
+    q: 'Do I lose ownership of my code?',
+    a: "No. Your project lives in your own account and stays yours — during the program and after you graduate. You only transfer it into the organization if you're leaving with no one lined up to take it over.",
+  },
+  {
+    q: 'Which projects should be registered here?',
+    a: 'Any incubator project worth keeping alive beyond your time on it — especially if you might graduate or switch focus.',
+  },
+  {
+    q: 'Do I need to know Git and pull requests already?',
+    a: "No. Learning the fork → edit → PR workflow is part of it. A mentor walks you through your first one.",
+  },
+  {
+    q: 'What is the "tap" repository?',
+    a: "One registry repo with a single JSON file listing every project. You register by opening a PR that appends an entry.",
+  },
+  {
+    q: 'Who can pick up a registered project?',
+    a: 'Any current Valley Christian student in the incubator. Browse the registry and talk to a mentor about taking one over.',
+  },
+  {
+    q: 'What documentation does my project need?',
+    a: "A README covering how to maintain, deploy, and learn the codebase. Clear hand-off docs are what make a project adoptable.",
+  },
+];
+---
+
+<section id="faq" class="relative mx-auto max-w-3xl scroll-mt-20 px-5 py-24 sm:px-8 md:py-32">
+  <h2 class="reveal text-[clamp(2rem,5vw,3.4rem)]">
+    Frequently asked
+  </h2>
+
+  <div class="mt-10 space-y-3">
+    {
+      faqs.map((f, i) => (
+        <details
+          class="reveal group rounded-2xl border-[1.5px] border-ink bg-surface transition-[box-shadow] open:shadow-hard"
+          data-reveal-delay={0.03 * i}
+        >
+          <summary
+            class="flex cursor-pointer list-none items-center justify-between gap-4 px-6 py-5 font-display text-lg font-bold"
+          >
+            {f.q}
+            <span
+              class="grid h-7 w-7 flex-none place-items-center rounded-full border-[1.5px] border-ink text-ink transition-transform duration-300 group-open:rotate-45 group-open:bg-saffron"
+              aria-hidden="true"
+            >
+              +
+            </span>
+          </summary>
+          <div class="-mt-1 px-6 pb-6 leading-relaxed text-ink-muted">{f.a}</div>
+        </details>
+      ))
+    }
+  </div>
+</section>

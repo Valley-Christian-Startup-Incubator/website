@@ -1,0 +1,55 @@
+---
+const orgUrl = 'https://github.com/Valley-Christian-Startup-Incubator';
+const tapUrl = 'https://github.com/Valley-Christian-Startup-Incubator/tap';
+const year = new Date().getFullYear();
+---
+
+<footer class="relative mt-12 bg-ink text-bg">
+  <!-- final CTA band -->
+  <div class="mx-auto max-w-6xl px-5 py-24 text-center sm:px-8 md:py-28">
+    <h2 class="reveal text-[clamp(2.1rem,6vw,4rem)] text-bg">
+      Ready to
+      <span class="mark-saffron box-decoration-clone px-1 text-ink"
+        >put your project on the map?</span
+      >
+    </h2>
+    <p
+      class="reveal mx-auto mt-6 max-w-xl text-lg text-bg/70"
+      data-reveal-delay="0.05"
+    >
+      Register it with the incubator and give the next builder a head start.
+    </p>
+    <a
+      href="#register"
+      class="reveal mt-9 inline-flex items-center gap-2 rounded-full border-[1.5px] border-ink bg-saffron px-7 py-3.5 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
+      data-reveal-delay="0.1"
+      style="box-shadow: 4px 4px 0 0 rgba(255,255,255,0.18)"
+    >
+      Register your project →
+    </a>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div
+      class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 sm:flex-row sm:px-8"
+    >
+      <div class="flex items-center gap-2.5 text-sm">
+        <span
+          class="grid h-7 w-7 place-items-center rounded-md bg-saffron text-xs font-extrabold text-ink"
+          aria-hidden="true">S</span
+        >
+        <span class="font-medium text-bg/70">Valley Christian Startup Incubator</span>
+      </div>
+      <nav class="flex items-center gap-6 text-sm font-medium text-bg/70">
+        <a href={orgUrl} target="_blank" rel="noopener" class="transition-colors hover:text-bg"
+          >Organization ↗</a
+        >
+        <a href={tapUrl} target="_blank" rel="noopener" class="transition-colors hover:text-bg"
+          >Registry ↗</a
+        >
+        <a href="#register" class="transition-colors hover:text-bg">Register</a>
+      </nav>
+      <p class="text-xs text-bg/45">© {year} · Built by students, for students.</p>
+    </div>
+  </div>
+</footer>

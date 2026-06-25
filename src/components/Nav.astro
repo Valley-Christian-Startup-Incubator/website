@@ -1,0 +1,83 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const links = [
+  { label: 'What it is', href: '#mission' },
+  { label: 'How it works', href: '#how' },
+  { label: 'Register', href: '#register' },
+  { label: 'FAQ', href: '#faq' },
+];
+const orgUrl = 'https://github.com/Valley-Christian-Startup-Incubator';
+---
+
+<header
+  class="fixed inset-x-0 top-0 transition-colors duration-300"
+  style="z-index: var(--z-nav)"
+  id="site-nav"
+>
+  <nav
+    class="mx-auto flex max-w-6xl items-center justify-between px-5 py-4 sm:px-8"
+  >
+    <a
+      href={base + '/'}
+      class="group flex items-center gap-2.5 font-display text-base font-extrabold tracking-tight text-ink"
+    >
+      <span
+        class="grid h-9 w-9 place-items-center rounded-xl bg-saffron text-[17px] font-extrabold text-ink shadow-hard transition-transform duration-200 group-hover:-translate-y-0.5"
+        aria-hidden="true">S</span
+      >
+      <span>SUI</span>
+    </a>
+
+    <div class="hidden items-center gap-7 md:flex">
+      {
+        links.map((l) => (
+          <a
+            href={l.href}
+            class="text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+          >
+            {l.label}
+          </a>
+        ))
+      }
+      <a
+        href="#register"
+        class="rounded-full border-[1.5px] border-ink bg-saffron px-4 py-2 text-sm font-bold text-ink shadow-hard transition-transform hover:-translate-y-0.5"
+        >Register a project</a
+      >
+    </div>
+
+    <a
+      href={orgUrl}
+      target="_blank"
+      rel="noopener"
+      class="text-sm font-bold text-ink md:hidden"
+      >GitHub ↗</a
+    >
+  </nav>
+</header>
+
+<script>
+  // Solidify the nav once the user scrolls past the hero fold.
+  const nav = document.getElementById('site-nav');
+  const onScroll = () => {
+    if (!nav) return;
+    nav.classList.toggle('nav-scrolled', window.scrollY > 24);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+</script>
+
+<style>
+  #site-nav nav {
+    border-bottom: 1.5px solid transparent;
+    transition:
+      background 0.25s,
+      border-color 0.25s;
+  }
+  #site-nav.nav-scrolled nav {
+    background: color-mix(in oklab, var(--color-bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom-color: var(--color-ink);
+  }
+</style>

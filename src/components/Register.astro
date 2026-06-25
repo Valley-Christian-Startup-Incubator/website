@@ -1,0 +1,169 @@
+---
+import CodeDemo from './CodeDemo.tsx';
+
+const orgUrl = 'https://github.com/Valley-Christian-Startup-Incubator';
+const tapUrl = 'https://github.com/Valley-Christian-Startup-Incubator/tap';
+
+const steps = [
+  {
+    n: 1,
+    title: 'Keep your project in your own repo',
+    body: "Your code stays yours — in your account. You own it during the program, and you can keep it after you graduate. Nothing moves into the org just to register.",
+  },
+  {
+    n: 2,
+    title: 'Write the hand-off docs',
+    body: 'Add a <code>README</code> covering how to <strong>maintain</strong>, <strong>deploy</strong>, and <strong>learn</strong> the project — so anyone who picks it up later can get going.',
+  },
+  {
+    n: 3,
+    title: 'Fork the registry',
+    body: 'The <code>tap</code> repo holds one JSON file listing every project. Fork it so you can propose a change.',
+  },
+  {
+    n: 4,
+    title: 'Add your project entry',
+    body: 'Append an entry that points at your repo and links your docs. Keep it accurate — this is what people browse.',
+  },
+  {
+    n: 5,
+    title: 'Open a pull request',
+    body: 'Open a PR back to <code>tap</code>. A mentor reviews it, and once merged, you\'re registered. 🎉',
+  },
+];
+
+const sampleJson = `{
+  "name": "Compost Tracker",
+  "slug": "compost-tracker",
+  "tagline": "Gamified composting for school cafeterias",
+  "repo": "jane-2024/compost-tracker",
+  "status": "active",
+  "stack": ["Next.js", "Supabase", "Tailwind"],
+  "owners": ["@jane-2024"],
+  "handoffDocs": "README.md",
+  "addedAt": "2026-06-24"
+}`;
+
+const gitFlow = `# 1. Fork tap on GitHub, then clone YOUR fork
+git clone https://github.com/<your-username>/tap.git
+cd tap
+
+# 2. Create a branch for your project
+git checkout -b register/compost-tracker
+
+# 3. Edit the registry, then commit
+git add .
+git commit -m "Register Compost Tracker"
+
+# 4. Push and open a pull request
+git push -u origin register/compost-tracker`;
+---
+
+<section id="register" class="relative scroll-mt-20 px-5 py-24 sm:px-8 md:py-32">
+  <!-- The one section drenched in saffron, to announce it as the main event -->
+  <div
+    class="mx-auto max-w-6xl overflow-hidden rounded-[28px] border-[1.5px] border-ink bg-saffron shadow-hard-lg"
+  >
+    <div class="px-5 py-12 sm:px-12 sm:py-16">
+      <div class="max-w-2xl">
+        <span
+          class="reveal inline-flex items-center rounded-full border-[1.5px] border-ink bg-surface px-3 py-1 text-xs font-bold text-ink"
+          >Start here</span
+        >
+        <h2
+          class="reveal mt-5 text-[clamp(2rem,5.5vw,3.6rem)] text-ink"
+          data-reveal-delay="0.05"
+        >
+          Register your business or project
+        </h2>
+        <p
+          class="reveal mt-5 max-w-prose text-lg text-ink/80"
+          data-reveal-delay="0.1"
+        >
+          Your code stays in your own account — registering just lists it so it
+          can be maintained and handed off. It's a single pull request, and
+          you'll learn the real open-source workflow doing it.
+        </p>
+      </div>
+
+      <div class="mt-12 grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:gap-12">
+        <!-- Steps on a white panel -->
+        <ol
+          class="reveal min-w-0 divide-y divide-ink/10 rounded-2xl border-[1.5px] border-ink bg-surface p-2"
+          data-reveal-delay="0.08"
+        >
+          {
+            steps.map((s) => (
+              <li class="flex gap-4 p-4 sm:p-5">
+                <span
+                  class="grid h-9 w-9 flex-none place-items-center rounded-full border-[1.5px] border-ink bg-saffron font-display text-base font-extrabold text-ink"
+                >
+                  {s.n}
+                </span>
+                <div class="min-w-0">
+                  <h3 class="text-lg font-bold leading-snug">{s.title}</h3>
+                  <p
+                    class="mt-1 text-[0.95rem] leading-relaxed text-ink-muted [overflow-wrap:anywhere] [&_code]:rounded [&_code]:bg-ink [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.82em] [&_code]:text-banana [&_code]:[overflow-wrap:anywhere] [&_strong]:font-semibold [&_strong]:text-ink"
+                    set:html={s.body}
+                  />
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+
+        <!-- Code panels: the one intentional dark moment, animated -->
+        <div class="reveal min-w-0" data-reveal-delay="0.12">
+          <CodeDemo json={sampleJson} flow={gitFlow} client:visible />
+        </div>
+      </div>
+
+      <!-- CTA row -->
+      <div
+        class="reveal mt-12 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
+        data-reveal-delay="0.1"
+      >
+        <a
+          href={tapUrl}
+          target="_blank"
+          rel="noopener"
+          class="group inline-flex items-center gap-2 rounded-full border-[1.5px] border-ink bg-ink px-7 py-3.5 text-base font-bold text-bg shadow-hard transition-transform hover:-translate-y-0.5"
+        >
+          Open the registry repo
+          <span class="transition-transform group-hover:translate-x-0.5">↗</span>
+        </a>
+        <a
+          href={orgUrl}
+          target="_blank"
+          rel="noopener"
+          class="inline-flex items-center gap-2 rounded-full border-[1.5px] border-ink bg-surface px-7 py-3.5 text-base font-bold text-ink transition-transform hover:-translate-y-0.5"
+        >
+          Browse the organization
+        </a>
+        <p class="text-sm font-medium text-ink/70 sm:ml-2">
+          New to pull requests? A mentor will walk you through it.
+        </p>
+      </div>
+
+      <!-- The org-transfer exception, called out clearly -->
+      <div
+        class="reveal mt-10 flex items-start gap-3 rounded-2xl border-[1.5px] border-ink bg-surface p-5"
+        data-reveal-delay="0.05"
+      >
+        <span
+          class="mt-0.5 grid h-6 w-6 flex-none place-items-center rounded-full border-[1.5px] border-ink bg-sky text-sm font-extrabold text-ink"
+          aria-hidden="true">!</span
+        >
+        <p class="text-[0.95rem] leading-relaxed text-ink-muted">
+          <strong class="font-bold text-ink">When do you move the repo into the
+            org?</strong> Only when you're leaving and have no apprentices to take
+          over. Transferring into
+          <code
+            class="rounded bg-ink px-1.5 py-0.5 font-mono text-[0.82em] text-banana [overflow-wrap:anywhere]"
+            >Valley-Christian-Startup-Incubator</code
+          > hands the project to the next generation. Otherwise, keep owning it.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

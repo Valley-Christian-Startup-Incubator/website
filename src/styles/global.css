@@ -1,0 +1,154 @@
+@import 'tailwindcss';
+
+/* ------------------------------------------------------------------ */
+/*  SUI — Bright / Saffron design system                               */
+/*  Light base, flat committed color, no gradients, no glass.          */
+/* ------------------------------------------------------------------ */
+
+@theme {
+  /* Surfaces */
+  --color-bg: oklch(94.2% 0.016 310.1); /* Lavender Mist #EFE9F4 */
+  --color-bg-deep: oklch(91% 0.02 310); /* slightly deeper panel base */
+  --color-surface: #ffffff; /* white cards/panels */
+
+  /* Ink (text) — near-black with a faint cool tint */
+  --color-ink: oklch(19.5% 0.018 300); /* #16131C */
+  --color-ink-muted: oklch(40.1% 0.034 298.6); /* #4A4458, AA on bg */
+
+  /* Brand + accents (flat fills; black ink rides on top) */
+  --color-saffron: oklch(76.5% 0.175 62.4); /* #FF9505 */
+  --color-saffron-deep: oklch(68% 0.17 56); /* hover/active */
+  --color-sky: oklch(71.2% 0.136 226.6); /* #08B2E3 */
+  --color-green: oklch(89.8% 0.138 149.1); /* #99F7AB */
+  --color-banana: oklch(93.6% 0.132 105); /* #F7EF81 */
+
+  /* Hairlines: solid ink at low alpha */
+  --color-line: color-mix(in oklab, var(--color-ink) 12%, transparent);
+  --color-line-strong: color-mix(in oklab, var(--color-ink) 22%, transparent);
+
+  /* Fonts */
+  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* Motion — ease-out only, no bounce */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  /* Z-index scale */
+  --z-nav: 50;
+  --z-overlay: 80;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-saffron);
+    color: var(--color-ink);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.02;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-ink);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Utilities — flat, no gradients                                     */
+/* ------------------------------------------------------------------ */
+
+@layer utilities {
+  /* Reveal initial state (enhances an already-laid-out element) */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  /* Solid-ink card on the light surface */
+  .panel {
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-ink);
+    border-radius: 18px;
+  }
+
+  /* Hard offset shadow — the playful "sticker" look, flat not blurry */
+  .shadow-hard {
+    box-shadow: 4px 4px 0 0 var(--color-ink);
+  }
+  .shadow-hard-lg {
+    box-shadow: 6px 6px 0 0 var(--color-ink);
+  }
+
+  /* Marker-style highlight behind inline text (flat fill, no gradient).
+     Slight rotation gives it a hand-placed, sticker feel. */
+  .mark-saffron {
+    background: var(--color-saffron);
+    border-radius: 6px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+  .mark-sky {
+    background: var(--color-sky);
+    border-radius: 6px;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/*  Reduced motion                                                     */
+/* ------------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

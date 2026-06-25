@@ -1,0 +1,66 @@
+---
+const steps = [
+  {
+    n: '1',
+    color: 'bg-saffron',
+    title: 'Build with mentoring',
+    body: 'Join the incubator and ship your business with real guidance — and real users, not just slides.',
+  },
+  {
+    n: '2',
+    color: 'bg-sky',
+    title: 'Register & document it',
+    body: 'Add your project to the org with everything a successor needs: how to run, ship, and learn it.',
+  },
+  {
+    n: '3',
+    color: 'bg-green',
+    title: 'Hand it off when you move on',
+    body: 'Graduating or shifting focus? Your project is ready for the next student to pick up.',
+  },
+  {
+    n: '4',
+    color: 'bg-banana',
+    title: 'The idea keeps growing',
+    body: 'The next builder inherits momentum instead of starting from zero, year after year.',
+  },
+];
+---
+
+<section id="how" class="relative scroll-mt-20 px-5 py-24 sm:px-8 md:py-32">
+  <div class="mx-auto max-w-6xl">
+    <h2
+      class="reveal max-w-2xl text-[clamp(2rem,5vw,3.4rem)]"
+    >
+      How a project lives in the incubator
+    </h2>
+
+    <ol class="relative mt-14 max-w-3xl">
+      <!-- vertical rail -->
+      <div
+        class="absolute bottom-10 left-[1.85rem] top-10 w-[2px] bg-ink/15"
+        aria-hidden="true"
+      >
+      </div>
+      {
+        steps.map((s, i) => (
+          <li
+            class="reveal relative flex gap-6 pb-12 last:pb-0"
+            data-reveal-delay={0.05 + i * 0.05}
+          >
+            <span
+              class={`relative z-10 grid h-15 w-15 flex-none place-items-center rounded-2xl border-[1.5px] border-ink font-display text-2xl font-extrabold text-ink shadow-hard ${s.color}`}
+              style="height:3.75rem;width:3.75rem"
+            >
+              {s.n}
+            </span>
+            <div class="pt-2">
+              <h3 class="text-xl font-bold sm:text-2xl">{s.title}</h3>
+              <p class="mt-2 max-w-xl text-ink-muted">{s.body}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
