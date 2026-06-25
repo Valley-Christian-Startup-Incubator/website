@@ -24,7 +24,7 @@ const steps = [
   {
     n: 1,
     title: 'Fork & edit the registry',
-    body: 'Fork the <code>tap</code> repo, then add an entry to <code>registry.json</code> that points at your repo and links your docs.',
+    body: `Fork the <a href="${tapUrl}" target="_blank" rel="noopener"><code>tap</code></a> repo, then add an entry to <code>registry.json</code> that points at your repo and links your docs.`,
     shot: `${base}/demo-edit.webp`,
     label: 'registry.json · GitHub',
     alt: 'GitHub web editor showing registry.json with a new project entry added to the array.',
@@ -112,7 +112,7 @@ const steps = [
                 <div class="min-w-0">
                   <h4 class="text-xl font-bold leading-snug text-ink">{s.title}</h4>
                   <p
-                    class="mt-1.5 leading-relaxed text-ink-muted [overflow-wrap:anywhere] [&_code]:rounded [&_code]:bg-ink [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.82em] [&_code]:text-banana [&_code]:[overflow-wrap:anywhere] [&_strong]:font-semibold [&_strong]:text-ink"
+                    class="mt-1.5 leading-relaxed text-ink-muted [overflow-wrap:anywhere] [&_a]:underline [&_a]:decoration-2 [&_a]:underline-offset-2 [&_a]:transition-opacity [&_a:hover]:opacity-80 [&_code]:rounded [&_code]:bg-ink [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-[0.82em] [&_code]:text-banana [&_code]:[overflow-wrap:anywhere] [&_strong]:font-semibold [&_strong]:text-ink"
                     set:html={s.body}
                   />
                 </div>
